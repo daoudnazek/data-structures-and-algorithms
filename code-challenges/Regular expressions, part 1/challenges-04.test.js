@@ -24,8 +24,8 @@ let $ = createSnippetWithJQuery(`
 
 const generateSubmitButton = () => {
   // Solution code here...
-  let regex = /\d/;
-  return regex.test(input);
+  let btn ='<button text="submit">submit</button>';
+  $('form').append(btn);
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -42,8 +42,8 @@ For example:
 
 const isNum = (input) => {
   // Solution code here...
-  let regex = /\b[A-Z]\w+/g;
-  return str.match(regex);
+  let regex = /\d/g;
+  return regex.test(input);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -56,15 +56,8 @@ Return an array containing all the matches.
 
 const isCapitalized = (str) => {
   // Solution code here...
-  let resArr = [];
-  let regex = /^[a-j]\w*/gi;
-  for (var i in arr) {
-    if (arr[i].match(regex)) {
-      resArr.push(arr[i]);
-    }
-  }
-  return resArr;
-};
+  let regex = /\b[A-Z](\w)*/g;
+  return str.match(regex);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -75,8 +68,15 @@ Write a function named citiesAtoJ that takes in an array of city names and uses 
 
 const citiesAtoJ = (arr) => {
   // Solution code here...
-  let regex =/^[Oo](ct)(ober)*\b/;    //    /^[Oo]ct(ober)?\b/
-  return regex.test(input)
+  let regex = /^[A-J]/;
+  let returnedCities = [];
+
+  arr.forEach(city => {
+    if(regex.test(city)) {
+      returnedCities.push(city);
+    } 
+  });
+  return returnedCities;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -93,8 +93,8 @@ Do not use the vertical bar (pipe) in your pattern.
 
 const matchMonth = (input) => {
   // Solution code here...
-  let regex = /\w+\s/g
-  return str.match(regex)
+  let regex = /^[Oo]ct(ober)/;
+  return regex.test(input);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -203,7 +203,7 @@ describe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should match any of the acceptable inputs', () => {
     expect(matchMonth('Oct')).toBeTruthy();
     expect(matchMonth('oct')).toBeTruthy();
